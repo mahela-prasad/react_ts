@@ -1,4 +1,20 @@
 import { useState } from "react";
+import styled from "styled-components";
+import { BsFillCalendar2Fill } from "react-icons/bs";
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+interface ListItemProp {
+  active: boolean;
+}
+
+const ListItem = styled.li<ListItemProp>`
+  padding: 5px 0;
+  background: ${(props) => (props.active ? "blue" : "none")};
+`;
 
 interface Props {
   items: string[];
@@ -11,16 +27,14 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
 
   return (
     <>
-      <h1>{heading}</h1>
+      <h1>
+        <BsFillCalendar2Fill /> {heading}
+      </h1>
       {items.length === 0 && <p>No items found</p>}
-      <ul className="list-group">
+      <List>
         {items.map((item, index) => (
-          <li
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
+          <ListItem
+            active={index === selectedIndex}
             onClick={() => {
               setSelectedIndex(index);
               onSelectItem(item);
@@ -28,9 +42,9 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
             key={item}
           >
             {item}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 }

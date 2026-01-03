@@ -1,18 +1,17 @@
 import { useState } from "react";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
+import ListGroup from "./components/ListGroup/ListGroup";
+import Like from "./components/Like";
 
 function App() {
-  const [alertVis, setAlertVis] = useState(false);
+  let items = ["New York", "San Francisco", "Tokyo", "London"];
+
+  const handleSelectItem = (item: string) => {
+    console.log(item);
+  };
 
   return (
     <div>
-      {alertVis && (
-        <Alert onClose={() => setAlertVis(false)}>Btn clicked</Alert>
-      )}
-      <Button color="secondary" onClick={() => setAlertVis(!alertVis)}>
-        Click
-      </Button>
+      <Like onClick={() => console.log("clicked")} />
     </div>
   );
 }
